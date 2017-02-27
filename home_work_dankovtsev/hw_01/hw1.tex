@@ -20,7 +20,7 @@ $$ class(x) = argmax_y {P_c
 \prod_{k=1}^n}\frac{1}{\sqrt{2 \pi \sigma^2}}
 e^{-\frac {({x^{(k)} - \mu_{yk})}^2}{2\sigma^2}} $$
 Прологарифмируем рассматриваемое произведение:
-$$ L(x, y) = ln(P_c) + ln(\frac{n}{\sqrt{2 \pi \sigma^2}})
+$$ L(x, y) = ln(P_c) + ln(\frac{1}{\sqrt{2 \pi \sigma^2}}) n
 + \sum_{k=1}^n {-\frac {({x^{(k)} - \mu_{yk})}^2}{2\sigma^2}} $$
 Нахождение $argmax_y(L(x, y))$ эквивалентно нахождению
 $argmax_y$ исходной функции.
