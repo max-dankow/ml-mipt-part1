@@ -1,0 +1,108 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{xcolor}
+
+\begin{document}
+
+\subsection*{Знакомство с линейным классификатором}
+\begin{enumerate}
+
+    \item
+        $ f(x) = <w, x> + w_0 $
+
+        $ class(x) = 1$, если $ f(x)>0 $
+
+        $ class(x) = -1 $, иначе
+    \item
+        Отступом на объекте называется
+        $M(x) = class_{actual}(x) \cdot f(x)$
+
+        $ M(x) > 0 $ если $ class(x) = class_{actual}(x) $
+
+        $ M(x) < 0 $ если $ class(x) \neq class_{actual}(x) $
+
+    \item
+         Всем объектам добавляют дополнительный признак равный 1.
+
+    \item
+        $$ Q(w) = \sum_{i=1}^l [M_i(w) < 0] $$
+        $$ w_{best} = argmin(Q(w)) $$
+
+    \item
+        $ w = (0,...,0) $
+
+    \item
+        $$ \widetilde{Q}(w) = \sum_{i=1}^l L(M_i(w)) $$
+        где L - функция потерь
+
+    \item
+        Функция потерь нужна чтобы аппроксимировать функционал
+        эмпирического риска и при этом иметь возможность применять
+        применять методы оптимизации для ее минимизации.
+        Такие функции обычно возрастают при $M\rightarrow-\inf$
+        и стремятся к нулю при $M\rightarrow+\inf$,
+        и, судя по всему, в нуле обычно равны 1.
+
+    \item
+        $ V(M) = (1 - M)_+ $
+
+    \item
+        Регуляризация - это способ уменьшить переобучение линейной модели, штрафующий за большие по модулю веса в модели.
+        Основные регуляризаторы это:
+        \begin{itemize}
+            \item сумма модулей весов ($L_1$ регуляризатор)
+            \item сумма квадратов весов ($L_2$ регуляризатор)
+        \end{itemize}
+
+    \item
+        Переобучение само по себе означает подстроение модели
+        к обучающей выборке, то есть уменьшение обобщающей способности.
+        А поскольку резуляризация препятствует переобучению,
+        то она улучшает обобщающую способность.
+
+\end{enumerate}}
+
+
+\subsection*{Повторение: метрики качества}
+\begin{enumerate}
+    \item
+        Accuracy: доля правильных ответов классификации
+
+        Precision: TruePositive / (TruePositive + FalsePositive)
+
+        Recall: TruePositive / (TruePositive + FalseNegative)
+
+    \item
+        $TPR = \frac{TruePositive}{TruePositive + FalseNegative}$
+
+        $FPR = \frac{FalsePositive}{FalsePositive + TrueNegative}$
+
+        ROC кривая - график зависимости TPR от FPR.
+        Мера AUC - площадь под ROC.
+
+    \item
+        Постоить ROC кривую можно следующим образом:
+        \begin{enumerate}
+            \item
+                По известным ответам посчитать число объектов
+                обоих классов $m_-, m_+$
+            \item
+                Упорядочить выборку по убыванию $probability(x)$
+            \item
+                Установить начальное значение (0, 0)
+            \item
+                Перебирем все объекты выборки
+                \begin{itemize}
+                    \item
+                        если очередной объект принадлежит классу -1
+                        то сместимся вправо: $FPR := FPR + \frac{1}{m_-}$
+                    \item
+                        иначе вверх: $TPR := TPR + \frac{1}{m_+}$
+                \end{itemize}
+
+        \end{enumerate}
+
+\end{enumerate}
+\end{document}
